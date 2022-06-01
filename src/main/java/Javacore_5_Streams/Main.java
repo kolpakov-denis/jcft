@@ -1,20 +1,13 @@
 package Javacore_5_Streams;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         AppData appdata = new AppData();
-       /* File file = new File("1.txt");
-        file.createNewFile();
-        System.out.println(file.exists());
-        file.delete();
-
-        */
         appdata.load("data.txt");
-
+        System.out.println("Заголовок: " + Arrays.toString(appdata.getHeader()));
+        System.out.println("Данные: " + Arrays.deepToString(appdata.getData()));
         appdata.save("data1.txt");
     }
 }

@@ -16,24 +16,19 @@ public class AppData {
         return data;
     }
 
+    //Интересно, кто-нибудь ещё сделал так-же? (:
     public String toMyString (Object[] a) {
-        if (a == null)
-            return "null";
         int iMax = a.length - 1;
-        if (iMax == -1)
-            return "[]";
 
         StringBuilder b = new StringBuilder();
 
         for (int i = 0; ; i++) {
             b.append(a[i]);
             if (i == iMax)
-                return b.append("").toString();
-            b.append("; ").toString();
+                return b.toString();
+            b.append(";").toString();
         }
     }
-
-
 
     private int[] stringToRow(String str) {
         String[] string = str.split(";");
@@ -48,11 +43,18 @@ public class AppData {
     public void save(String fileName) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             writer.write((toMyString(header)) + "\n");
-
-            for (int[] row : data) {
-                Object[] x = (Integer) row;
-                writer.write(toMyString() + "\n");
+         //   System.out.println(Arrays.deepToString(data));
+            String[] arrStr = new String[3];
+            for (int i = 0; i < data[0].length; i++) {
+                arrStr[i] = String.valueOf(data[0][i]);
             }
+            writer.write((toMyString(arrStr)) + "\n");
+            String[] arrStr1 = new String[3];
+
+            for (int y = 0; y < data[1].length; y++) {
+                    arrStr1[y] = String.valueOf(data[1][y]);
+                }
+            writer.write((toMyString(arrStr1)));
 
         } catch (IOException e) {
             e.printStackTrace();
