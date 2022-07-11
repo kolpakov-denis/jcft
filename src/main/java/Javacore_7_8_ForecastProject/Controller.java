@@ -1,9 +1,7 @@
-package Javacore_7_ForecastProject;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+package Javacore_7_8_ForecastProject;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,10 +12,10 @@ public class Controller {
     public Controller() {
         variants.put(1, Period.ONE_DAY);
         variants.put(5, Period.FIVE_DAYS);
-       // variants.put(2, Period.DB);
+        variants.put(2, Period.DB);
     }
 
-    public void getWeather(String userInput, String selectedCity) throws IOException {
+    public void getWeather(String userInput, String selectedCity) throws IOException, SQLException {
         Integer userIntegerInput = Integer.parseInt(userInput);
 
         switch (variants.get(userIntegerInput)) {
@@ -25,13 +23,14 @@ public class Controller {
                 weatherModel.getWeather(selectedCity, Period.ONE_DAY);
                 break;
             case FIVE_DAYS:
-                //throw new IOException("Метод не реализован!");
                 weatherModel.getWeather(selectedCity, Period.FIVE_DAYS);
                 break;
-           /* case DB:
-                weatherModel.getSavedToDBWeather();
+           case DB:
+               DataBaseRepository db = new DataBaseRepository();
+               System.out.println(db.getSavedToDBWeather(selectedCity));
+                break;
 
-            */
+
         }
     }
 
